@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hi Boyfie</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Chewy&family=Fredoka:wght@400;500;600&family=Josefin+Sans:wght@400;600;700&family=Racing+Sans+One&family=Baloo+2:wght@500;600;700&family=Yellowtail&family=Irish+Grover&family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- =========================================================
+     GATE — fixed overlay that holds the quiz + try-again.
+     Locks page scroll until Q3 is answered correctly.
+     ========================================================= -->
+<div id="gate">
+
+  <!-- ---------- Q1 : Hi Boyfie ---------- -->
+  <section class="screen quiz-screen active" data-screen="q1">
+    <img src="assets/web-heart-line.png" alt="" class="deco deco-web-corner" aria-hidden="true">
+    <img src="assets/spiderman-kitty.png" alt="" class="deco deco-hang-topper" aria-hidden="true">
+    <img src="assets/kitty-bow.png" alt="" class="deco deco-kitty-peek" aria-hidden="true">
+
+    <div class="quiz-card">
+      <div class="quiz-header quiz-header--with-topper">
+        <div class="quiz-heading-text">
+          <h1 class="quiz-title" data-split>Hii Boyfie!</h1>
+          <p class="quiz-subtitle">Solve the quiz to see the ........</p>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-options" role="group" aria-label="Question 1 options">
+          <button class="quiz-option" type="button" data-value="lips">Lips</button>
+          <button class="quiz-option" type="button" data-value="nose">Nose</button>
+          <button class="quiz-option" type="button" data-value="eyes">Eyes</button>
+        </div>
+        <p class="quiz-question"><span class="q-num">1.</span> What is my fav part of your face?</p>
+      </div>
+
+      <button class="btn-next" type="button" data-next disabled>Next</button>
+    </div>
+  </section>
+
+  <!-- ---------- Q2 : Let's See ---------- -->
+  <section class="screen quiz-screen" data-screen="q2">
+    <img src="assets/web-heart-line.png" alt="" class="deco deco-web-corner" aria-hidden="true">
+    <img src="assets/kitty-bow.png" alt="" class="deco deco-kitty-peek" aria-hidden="true">
+
+    <div class="quiz-card">
+      <img src="assets/batman-grumpy.png" alt="" class="deco deco-batman-side" aria-hidden="true">
+      <div class="quiz-header">
+        <div class="quiz-heading-text quiz-heading-text--solo">
+          <h1 class="quiz-title" data-split>Let&rsquo;s see</h1>
+          <p class="quiz-subtitle">Solve the quiz to see the ........</p>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-options" role="group" aria-label="Question 2 options">
+          <button class="quiz-option" type="button" data-value="gay">Gay</button>
+          <button class="quiz-option" type="button" data-value="babe">Babe</button>
+          <button class="quiz-option" type="button" data-value="jaan">Jaan</button>
+          <button class="quiz-option" type="button" data-value="all">All</button>
+        </div>
+        <p class="quiz-question"><span class="q-num">2.</span> What do I call you most?</p>
+      </div>
+
+      <button class="btn-next" type="button" data-next disabled>Next</button>
+    </div>
+  </section>
+
+  <!-- ---------- Q3 : Ok Ok last ---------- -->
+  <section class="screen quiz-screen" data-screen="q3">
+    <img src="assets/web-heart-line.png" alt="" class="deco deco-web-corner" aria-hidden="true">
+
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <div class="quiz-heading-text quiz-heading-text--solo">
+          <h1 class="quiz-title" data-split>Ok Ok last</h1>
+          <p class="quiz-subtitle">Solve the quiz to see the ........</p>
+        </div>
+      </div>
+
+      <div class="quiz-box quiz-box--input">
+        <p class="quiz-question quiz-question--full"><span class="q-num">3.</span> When is our anniversary?</p>
+        <input type="text" class="date-input" id="q3-input" placeholder="dd/mm" autocomplete="off">
+      </div>
+
+      <div class="kitty-warning">
+        <img src="assets/kitty-muscular.png" alt="" class="kitty-warning-img" aria-hidden="true">
+        <p class="hint-text">Jodi vul koro</p>
+      </div>
+
+      <button class="btn-next" type="button" data-next disabled>Next</button>
+    </div>
+  </section>
+
+  <!-- ---------- Try Again Bitch ---------- -->
+  <section class="screen tryagain-screen" data-screen="tryagain">
+    <div class="tryagain-card">
+      <span class="im-here-badge">Na parle.....</span>
+      <img src="assets/slap-comic.png" alt="" class="tryagain-comic">
+      <h2 class="tryagain-title">Try Again<br>Bitch!</h2>
+    </div>
+    <button class="btn-tryagain" type="button" id="btn-tryagain">Try Again</button>
+  </section>
+
+</div>
+
+<!-- =========================================================
+     REVEAL — normal document flow, scroll-locked until Q3 passes
+     ========================================================= -->
+<main id="reveal-content">
+
+  <!-- ---------- Reveal hero: photo collage + Batman walk-off ---------- -->
+  <section class="reveal-hero" id="reveal-hero">
+    <div class="reveal-hero-group">
+
+      <div class="spider-reveal-wrap">
+        <img src="assets/web-heart-sticker.png" alt="" class="deco deco-reveal-web" aria-hidden="true">
+        <img src="assets/spider-lady-standing.png" alt="" class="deco deco-reveal-spider" aria-hidden="true">
+        <p class="reveal-caption"><span class="caption-blue">Here is my</span><br><span class="caption-orange">perfect boyfie</span></p>
+      </div>
+
+      <div class="reveal-card">
+        <img src="assets/photo-collage.png" alt="Our photos" class="reveal-photo">
+        <img src="assets/batman-ramen.png" alt="" class="deco deco-batman-corner" aria-hidden="true">
+      </div>
+
+    </div>
+
+    <div class="batman-ground-stage" aria-hidden="true">
+      <img src="assets/batman-walk.png" alt="" class="batman-walker" id="batmanWalker">
+    </div>
+  </section>
+
+  <!-- ---------- Paragraph section: Spider Lady drags the box down ---------- -->
+  <section class="paragraph-section" id="paragraph-section">
+
+    <div class="anchor-point" aria-hidden="true">
+      <img src="assets/spiderman-chibi.png" alt="" class="anchor-icon">
+    </div>
+    <div class="anchor-rope" id="anchorRope"></div>
+
+    <div class="drag-unit" id="dragUnit">
+      <div class="screen-mount">
+        <div class="paragraph-box" id="paragraphBox">
+          <div class="word-count">1,286</div>
+          <div class="word-count-label">WORDS PARAGRAPH</div>
+
+          <div class="paragraph-text">
+            <!-- PLACEHOLDER — replace with the real 1,286-word letter -->
+            <p>[Placeholder text — this is where your full paragraph goes. Replace this block with your real letter to him once it's ready. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...]</p>
+          </div>
+        </div>
+      </div>
+
+      <img src="assets/hearts-corner.png" alt="" class="deco deco-hearts-trail" aria-hidden="true">
+
+      <div class="spider-sway">
+        <img src="assets/spider-lady.png" alt="" class="spider-lady-img">
+      </div>
+    </div>
+
+    <div class="so-havvyy" aria-hidden="true">
+      <span>SO</span><span>HA</span><span>VV</span><span>YY</span>
+    </div>
+  </section>
+
+  <!-- ---------- End card ---------- -->
+  <section class="end-section" id="end-section">
+    <img src="assets/batman-dress.png" alt="" class="end-batman">
+    <div class="end-card">
+      <p class="end-title" data-split>The End</p>
+      <p class="end-script">Happy Birthday<br>Princess</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,725 @@
+/* =========================================================
+   DESIGN TOKENS — from the Canva palette PDF
+   ========================================================= */
+:root {
+  --oxford-blue:   #192338;
+  --space-cadet:   #1E2E4F;
+  --ynmn-blue:     #31487A;
+  --jordy-blue:    #8FB3E2;
+  --lavender:      #D9E1F1;
+
+  --pink-accent:   #ff6fa5;
+  --pink-soft:     #ffd1e3;
+  --orange-accent: #ff8a3d;
+
+  --font-hangyaboly: 'Caveat', cursive;      /* sub: Hangyaboly */
+  --font-chewy: 'Chewy', cursive;            /* exact */
+  --font-apricots: 'Fredoka', sans-serif;    /* sub: Apricots */
+  --font-vierkant: 'Josefin Sans', sans-serif; /* sub: Architype VierkantT */
+  --font-racing: 'Racing Sans One', cursive; /* exact */
+  --font-betterfaster: 'Baloo 2', cursive;   /* sub: Better Faster */
+  --font-youngest: 'Yellowtail', cursive;    /* sub: The Youngest Script */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--oxford-blue);
+  color: var(--lavender);
+  font-family: var(--font-apricots);
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+
+img { display: block; max-width: 100%; }
+
+button { font-family: inherit; border: none; background: none; cursor: pointer; }
+
+/* =========================================================
+   CUSTOM CURSOR (hooked up fully once interactive JS lands)
+   ========================================================= */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--pink-accent);
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1.5px solid var(--jordy-blue);
+  transition: width .25s var(--ease-out), height .25s var(--ease-out), opacity .25s;
+}
+@media (hover: none) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* =========================================================
+   SCREEN / SECTION SHELL
+   ========================================================= */
+.screen {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 0%, var(--space-cadet) 0%, var(--oxford-blue) 60%);
+}
+
+/* =========================================================
+   SECTION 1 — QUIZ SCREEN
+   ========================================================= */
+.quiz-card {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 460px);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 26px 26px;
+}
+
+.quiz-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 34px;
+}
+
+.quiz-header--with-topper {
+  padding-left: 100px; /* leaves room for the web + spiderman-kitty group */
+}
+
+.quiz-heading-text {
+  flex: 1;
+  text-align: right;
+}
+
+.quiz-title {
+  font-family: var(--font-hangyaboly);
+  font-weight: 600;
+  font-size: clamp(34px, 8vw, 44px);
+  line-height: 1;
+  color: var(--lavender);
+  letter-spacing: 0.5px;
+}
+
+.quiz-subtitle {
+  font-family: var(--font-chewy);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--jordy-blue);
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+.quiz-box {
+  width: 100%;
+  border: 1.5px solid rgba(217, 225, 241, 0.5);
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(30, 46, 79, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.quiz-question {
+  flex: 1;
+  font-family: var(--font-chewy);
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--lavender);
+  text-align: center;
+}
+
+.q-num {
+  color: var(--pink-accent);
+  margin-right: 4px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.quiz-option {
+  width: 118px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--jordy-blue);
+  color: var(--lavender);
+  font-family: var(--font-apricots);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  transition: transform .25s var(--ease-out), background .25s var(--ease-out), border-color .25s var(--ease-out);
+}
+
+.quiz-option:hover {
+  background: rgba(143, 179, 226, 0.15);
+  transform: translateY(-2px);
+}
+
+.quiz-option.selected {
+  background: var(--jordy-blue);
+  color: var(--oxford-blue);
+  border-color: var(--jordy-blue);
+  font-weight: 600;
+}
+
+.btn-next {
+  align-self: flex-end;
+  margin-top: 26px;
+  padding: 9px 30px;
+  border-radius: 999px;
+  border: 1.5px solid var(--jordy-blue);
+  background: transparent;
+  color: var(--lavender);
+  font-family: var(--font-apricots);
+  font-size: 14px;
+  font-style: italic;
+  transition: transform .2s var(--ease-out), background .2s var(--ease-out);
+}
+
+.btn-next:hover {
+  transform: translateY(-3px);
+  background: rgba(143, 179, 226, 0.15);
+}
+
+.btn-next:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
+.btn-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* decorative art placement (per PDF map) */
+.deco {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.deco-web-corner {
+  top: -6px;
+  left: -6px;
+  width: 150px;
+  opacity: 0.55;
+  z-index: 1;
+}
+
+.deco-hang-topper {
+  top: 6px;
+  left: 4px;
+  width: 118px;
+  z-index: 2;
+  animation: hang-sway 4.5s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes hang-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+.deco-kitty-peek {
+  top: 50%;
+  right: -36px;
+  transform: translateY(-50%);
+  width: 84px;
+}
+
+@media (min-width: 640px) {
+  .deco-web-corner { width: 190px; }
+  .deco-hang-topper { width: 150px; }
+  .deco-kitty-peek { width: 110px; right: -48px; }
+}
+
+/* =========================================================
+   GATE — fixed quiz overlay (Q1/Q2/Q3/Try Again)
+   ========================================================= */
+html.locked, html.locked body {
+  overflow: hidden;
+  height: 100%;
+}
+
+#gate {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 1;
+  transition: opacity .8s var(--ease-out);
+}
+
+#gate.gate-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#gate .screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s var(--ease-out);
+}
+
+#gate .screen.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#reveal-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* decorative batman sitting on Q2 quiz box, per reference screenshot */
+.deco-batman-side {
+  top: 68px;
+  left: -34px;
+  width: 108px;
+  z-index: 3;
+}
+
+@media (min-width: 640px) {
+  .deco-batman-side { width: 130px; top: 74px; left: -42px; }
+}
+
+/* Q3 — bodybuilder kitty "saying" the warning, sitting on the box corner */
+.kitty-warning {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: -18px;
+  margin-left: -28px;
+  margin-bottom: 8px;
+}
+
+.kitty-warning-img {
+  width: 118px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+@media (min-width: 640px) {
+  .kitty-warning-img { width: 140px; }
+}
+
+.quiz-heading-text--solo {
+  flex: 1;
+  text-align: center;
+}
+
+/* ---------- Q3 date input box ---------- */
+.quiz-box--input {
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.quiz-question--full {
+  text-align: center;
+}
+
+.date-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--jordy-blue);
+  background: rgba(217, 225, 241, 0.06);
+  color: var(--lavender);
+  font-family: var(--font-apricots);
+  font-size: 15px;
+  text-align: center;
+  outline: none;
+  transition: border-color .2s var(--ease-out), background .2s var(--ease-out);
+}
+
+.date-input::placeholder { color: rgba(217, 225, 241, 0.4); }
+
+.date-input:focus {
+  border-color: var(--pink-accent);
+  background: rgba(217, 225, 241, 0.1);
+}
+
+.hint-text {
+  font-family: var(--font-betterfaster);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pink-accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  margin-left: -6px;
+}
+
+/* =========================================================
+   TRY AGAIN BITCH
+   ========================================================= */
+.tryagain-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background: radial-gradient(120% 90% at 50% 0%, var(--space-cadet) 0%, var(--oxford-blue) 60%);
+}
+
+.tryagain-card {
+  position: relative;
+  width: min(80vw, 320px);
+  border-radius: 18px;
+  background: var(--space-cadet);
+  padding: 26px 22px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.im-here-badge {
+  align-self: flex-start;
+  border: 1px solid var(--jordy-blue);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-family: 'Irish Grover', cursive;
+  font-size: 11px;
+  color: var(--jordy-blue);
+  margin-bottom: 12px;
+}
+
+.tryagain-comic {
+  width: 65%;
+  margin-bottom: 8px;
+}
+
+.tryagain-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(180deg, var(--orange-accent), #ff5f3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 0 var(--jordy-blue);
+}
+
+.btn-tryagain {
+  padding: 12px 36px;
+  border-radius: 999px;
+  background: var(--pink-accent);
+  color: var(--oxford-blue);
+  font-family: var(--font-betterfaster);
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 6px 20px rgba(255, 111, 165, 0.35);
+  transition: transform .2s var(--ease-out);
+}
+
+.btn-tryagain:hover { transform: translateY(-3px); }
+.btn-tryagain:active { transform: translateY(-1px) scale(0.97); }
+
+/* =========================================================
+   REVEAL HERO
+   ========================================================= */
+.reveal-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: radial-gradient(120% 90% at 50% 0%, var(--space-cadet) 0%, var(--oxford-blue) 60%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 16px;
+}
+
+.reveal-hero-group {
+  position: relative;
+  width: min(94vw, 440px);
+  display: flex;
+  align-items: flex-end;
+}
+
+.spider-reveal-wrap {
+  position: relative;
+  width: 54%;
+  z-index: 2;
+  margin-right: -6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deco-reveal-web {
+  position: absolute;
+  top: -8%;
+  left: -14%;
+  width: 88%;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.deco-reveal-spider {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.35));
+}
+
+.reveal-caption {
+  position: relative;
+  z-index: 2;
+  margin-top: -6px;
+  font-family: var(--font-racing);
+  font-size: clamp(20px, 6vw, 26px);
+  line-height: 1.15;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.caption-blue { color: #09b3e4; }
+.caption-orange { color: var(--orange-accent); }
+
+.reveal-card {
+  position: relative;
+  width: 54%;
+  margin-top: 26%;
+  border-radius: 16px;
+  background: rgba(30, 46, 79, 0.5);
+  border: 1.5px solid rgba(217, 225, 241, 0.3);
+  padding: 12px 10px;
+  backdrop-filter: blur(6px);
+  z-index: 1;
+}
+
+.reveal-photo {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.deco-batman-corner {
+  position: absolute;
+  top: -64px;
+  right: 14%;
+  width: 42px;
+  z-index: 3;
+}
+
+.batman-ground-stage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 100px;
+  margin-top: 56px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.batman-walker {
+  position: absolute;
+  bottom: 0;
+  left: -70px; /* starts off-screen left, per spec */
+  width: 90px;
+  z-index: 4;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .batman-walker { width: 110px; left: -90px; }
+}
+
+/* =========================================================
+   PARAGRAPH SECTION — Spider Lady drag
+   ========================================================= */
+.paragraph-section {
+  position: relative;
+  min-height: 160vh;
+  background: linear-gradient(180deg, var(--oxford-blue) 0%, var(--space-cadet) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 80px;
+  overflow: hidden;
+}
+
+/* fixed point at the top the rope hangs from — this never moves */
+.anchor-point {
+  position: relative;
+  z-index: 3;
+}
+
+.anchor-icon {
+  width: 46px;
+  display: block;
+}
+
+/* rope from the fixed anchor down to the drag-unit — its height grows
+   as the unit descends, so it visually "pays out" while she pulls */
+.anchor-rope {
+  width: 2px;
+  height: 20px;
+  background: rgba(217, 225, 241, 0.4);
+  z-index: 2;
+}
+
+/* everything below — the box, the trail, and Spider Lady — moves as
+   ONE rigid, connected piece. She isn't dangling separately from the
+   screen; she's attached to it and drags it down with her. */
+.drag-unit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+}
+
+.screen-mount {
+  position: relative;
+  width: min(90vw, 420px);
+  z-index: 2;
+}
+
+.paragraph-box {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  border: 1.5px solid rgba(217, 225, 241, 0.35);
+  background: rgba(30, 46, 79, 0.4);
+  backdrop-filter: blur(6px);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.deco-hearts-trail {
+  position: relative;
+  width: 130px;
+  align-self: flex-end;
+  margin-right: min(5vw, 20px);
+  margin-top: -10px;
+  margin-bottom: -24px;
+  z-index: 1;
+  opacity: 0.95;
+}
+
+.word-count {
+  font-family: var(--font-vierkant);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--lavender);
+}
+
+.word-count-label {
+  font-family: var(--font-chewy);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--jordy-blue);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.spider-sway {
+  width: 140px;
+  transform-origin: top center;
+  animation: sway 4s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+.spider-lady-img { width: 100%; }
+
+.so-havvyy {
+  position: absolute;
+  top: 4%;
+  right: 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-racing);
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.so-havvyy span:nth-child(odd) { color: #09b3e4; }
+.so-havvyy span:nth-child(even) { color: var(--orange-accent); }
+
+.paragraph-text {
+  font-family: var(--font-apricots);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(217, 225, 241, 0.85);
+  text-align: left;
+}
+
+/* =========================================================
+   END SECTION
+   ========================================================= */
+.end-section {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--oxford-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  padding: 60px 20px;
+  overflow: hidden;
+}
+
+.end-batman {
+  width: min(60vw, 220px);
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+}
+
+.end-card { text-align: center; }
+
+.end-title {
+  font-family: var(--font-apricots);
+  font-size: 30px;
+  color: var(--lavender);
+  margin-bottom: 6px;
+}
+
+.end-script {
+  font-family: var(--font-youngest);
+  font-size: 34px;
+  line-height: 1.2;
+  color: var(--pink-accent);
+}
+
+/* char-split reveal (SplitType) */
+.char {
+  display: inline-block;
+}
