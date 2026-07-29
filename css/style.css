@@ -631,7 +631,7 @@ html.locked, html.locked body {
   font-family: var(--font-vierkant);
   font-weight: 700;
   font-size: 40px;
-  color: var(--lavender);
+  color: #e4879e;
 }
 
 .word-count-label {
