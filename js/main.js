@@ -155,14 +155,22 @@ function initSmoothScroll() {
     console.warn('Lenis not available — falling back to native scroll.');
     return;
   }
-
+const screenEl = document.getElementById('deviceScreen');
+  const contentEl = document.getElementById('reveal-content');
+  const isFramed = screenEl && contentEl && window.matchMedia('(min-width: 900px)').matches;
   try {
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+ const lenis = isFramed
+      ? new Lenis({ wrapper: screenEl, content: contentEl, duration: 1.1, smoothWheel: true })
+      : new Lenis({ duration: 1.1, smoothWheel: true });
     window.lenis = lenis;
     lenis.stop();
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
+    
+    if (isFramed) {
+      ScrollTrigger.defaults({ scroller: screenEl });
+    }
   } catch (e) {
     console.warn('Lenis init failed, falling back to native scroll.', e);
   }
