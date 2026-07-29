@@ -570,7 +570,7 @@ html.locked, html.locked body {
 } */
 .paragraph-section {
   position: relative;
-  min-height: 700vh;
+  min-height: 600vh;
   width: 100%;
   background: linear-gradient(180deg, var(--oxford-blue) 0%, var(--space-cadet) 100%);
   
