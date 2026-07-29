@@ -251,7 +251,7 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
 @media (min-width: 640px) {
   .deco-web-corner { width: 190px; }
   .deco-hang-topper { width: 150px; }
-  .deco-kitty-peek { width: 110px; right: 5px; }
+  .deco-kitty-peek { width: 110px; right: -20px; }
 }
 
 /* =========================================================
