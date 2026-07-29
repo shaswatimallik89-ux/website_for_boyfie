@@ -559,13 +559,14 @@ html.locked, html.locked body {
    ========================================================= */
 .paragraph-section {
   position: relative;
-  min-height: 160vh;
+  min-height: 250vh;
   background: linear-gradient(180deg, var(--oxford-blue) 0%, var(--space-cadet) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 20px 80px;
-  overflow: hidden;
+  padding-left: 50px;
+  padding-right: 50px;
+  overflow: visible;
 }
 
 /* fixed point at the top the rope hangs from — this never moves */
@@ -596,26 +597,128 @@ html.locked, html.locked body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  will-change: transform;
+  /* will-change: transform; */
 }
 
 .screen-mount {
   position: relative;
-  width: min(90vw, 420px);
+    width: 100vw;;
   z-index: 2;
+}
+.screen-mount {
+  transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* full-bleed breakout — box spans the whole page width, ignoring
+   .paragraph-section's side padding, while the section itself
+   (overflow:hidden) still contains it since the section is full-width */
+.screen-mount.expanded {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .paragraph-box {
+  transition: padding 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+    width: 100%;
+  min-height: 100vh;
+}
+
+.paragraph-box.expanded {
+  padding: 28px clamp(24px, 6vw, 100px);
+}
+.paragraph-box {
   position: relative;
   width: 100%;
+  min-height: 100vh;
+
   border-radius: 18px;
   border: 1.5px solid rgba(217, 225, 241, 0.35);
+
   background: rgba(30, 46, 79, 0.4);
   backdrop-filter: blur(6px);
+
   padding: 28px 24px;
   text-align: center;
 }
+/* ---------- See More / See Less ---------- */
+.paragraph-text {
+  position: relative;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
 
+.paragraph-text.collapsed {
+  max-height: 180px; /* adjust to taste — controls preview length */
+}
+
+.paragraph-text.collapsed::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(to bottom, transparent, #162938 85%);
+  pointer-events: none;
+}
+
+.see-more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px auto 4px;
+  padding: 10px 28px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #7997BE, #5B7BB3 45%, #3D5A8A 100%);
+  box-shadow: 0 4px 14px rgba(38, 64, 98, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.4s ease;
+}
+
+.see-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(22, 41, 56, 0.55);
+  background: linear-gradient(135deg, #5B7BB3, #3D5A8A 50%, #264062 100%);
+}
+
+.see-more-btn:active {
+  transform: translateY(0);
+}
+
+.see-more-icon {
+  font-size: 0.8rem;
+  transition: transform 0.4s ease;
+}
+
+.see-more-btn.expanded .see-more-icon {
+  transform: rotate(180deg);
+}
+/* four corner copies of the same hearts+bow sticker, mirrored via
+   transform, forming a decorative frame around the box */
+.box-frame {
+  position: absolute;
+  width: 74px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.box-frame--tr { top: -14px; right: -14px; }
+.box-frame--br { bottom: -14px; right: -14px; transform: scaleY(-1); }
+.box-frame--bl { bottom: -14px; left: -14px; transform: scale(-1, -1); }
+.box-frame--tl { top: -14px; left: -14px; transform: scaleX(-1); }
+
+@media (min-width: 640px) {
+  .box-frame { width: 90px; }
+}
 .deco-hearts-trail {
   position: relative;
   width: 130px;
