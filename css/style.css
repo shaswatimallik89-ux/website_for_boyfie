@@ -142,11 +142,7 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
   color: var(--lavender);
   text-align: center;
 }
-.deco-kitty-peek {
-  width: 250px;
-  height: 250px;
-  position: absolute;
-}
+
 .q-num {
   color: var(--pink-accent);
   margin-right: 4px;
@@ -241,17 +237,17 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
   50% { transform: rotate(4deg); }
 }
 
-/* .deco-kitty-peek {
+ .deco-kitty-peek {
   top: 50%;
   right: -36px;
   transform: translateY(-50%);
   width: 84px;
-} */
+} 
 
 @media (min-width: 640px) {
   .deco-web-corner { width: 190px; }
   .deco-hang-topper { width: 150px; }
-  .deco-kitty-peek { width: 110px; right: -20px; }
+  .deco-kitty-peek { width: 110px; right: -48px; }
 }
 
 /* =========================================================
