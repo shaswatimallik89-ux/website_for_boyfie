@@ -1,6 +1,7 @@
 /* =========================================================
    DESIGN TOKENS — from the Canva palette PDF
    ========================================================= */
+
 :root {
   --oxford-blue:   #192338;
   --space-cadet:   #1E2E4F;
@@ -114,10 +115,10 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
 
 .quiz-subtitle {
   font-family: var(--font-chewy);
-  font-size: 11px;
+  font-size: 30px;
   letter-spacing: 0.5px;
-  color: var(--jordy-blue);
-  opacity: 0.75;
+  color:  #4f99ca;
+  opacity: 1;
   margin-top: 6px;
 }
 
@@ -141,7 +142,11 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
   color: var(--lavender);
   text-align: center;
 }
-
+.deco-kitty-peek {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+}
 .q-num {
   color: var(--pink-accent);
   margin-right: 4px;
@@ -236,17 +241,17 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
   50% { transform: rotate(4deg); }
 }
 
-.deco-kitty-peek {
+/* .deco-kitty-peek {
   top: 50%;
   right: -36px;
   transform: translateY(-50%);
   width: 84px;
-}
+} */
 
 @media (min-width: 640px) {
   .deco-web-corner { width: 190px; }
   .deco-hang-topper { width: 150px; }
-  .deco-kitty-peek { width: 110px; right: -48px; }
+  .deco-kitty-peek { width: 110px; right: 5px; }
 }
 
 /* =========================================================
@@ -262,7 +267,7 @@ html.locked, html.locked body {
   inset: 0;
   z-index: 50;
   opacity: 1;
-  transition: opacity .8s var(--ease-out);
+   background: var(--oxford-blue);
 }
 
 #gate.gate-hidden {
@@ -275,7 +280,7 @@ html.locked, html.locked body {
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .5s var(--ease-out);
+  /* transition: opacity .5s var(--ease-out); */
 }
 
 #gate .screen.active {
@@ -286,8 +291,18 @@ html.locked, html.locked body {
 #reveal-content {
   position: relative;
   z-index: 1;
+  
+}
+#reveal-content {
+    opacity: 0;
+    visibility: hidden;
 }
 
+#reveal-content.ready {
+    opacity: 1;
+    visibility: visible;
+       transition: opacity .4s ease;
+}
 /* decorative batman sitting on Q2 quiz box, per reference screenshot */
 .deco-batman-side {
   top: 68px;

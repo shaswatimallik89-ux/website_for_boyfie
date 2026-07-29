@@ -105,7 +105,9 @@ function wireQ3() {
     nextBtn.disabled = true;
   });
 }
+const reveal = document.getElementById("reveal-content");
 
+reveal.classList.add("ready");
 /* ---------- Try Again button ---------- */
 document.getElementById('btn-tryagain').addEventListener('click', () => {
   goToScreen(lastMissedScreen);
@@ -115,7 +117,7 @@ document.getElementById('btn-tryagain').addEventListener('click', () => {
 function unlockReveal() {
   if (lockedForReveal) return;
   lockedForReveal = true;
-
+document.getElementById("reveal-content").classList.add("ready");
   gate.classList.add('gate-hidden');
 
   const finishUnlock = () => {
@@ -370,4 +372,16 @@ document.addEventListener('DOMContentLoaded', () => {
   safeInit(initSpiderDrag, 'initSpiderDrag');
   safeInit(initTextReveals, 'initTextReveals');
   safeInit(initCursor, 'initCursor');
+
+  // Allow Enter key to press the active Next button
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      const activeNextButton = document.querySelector(".screen.active [data-next]");
+
+      if (activeNextButton && !activeNextButton.disabled) {
+        event.preventDefault();
+        activeNextButton.click();
+      }
+    }
+  });
 });
