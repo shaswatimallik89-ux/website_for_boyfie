@@ -557,7 +557,7 @@ html.locked, html.locked body {
 /* =========================================================
    PARAGRAPH SECTION — Spider Lady drag
    ========================================================= */
-.paragraph-section {
+/* .paragraph-section {
   position: relative;
   min-height: 250vh;
   background: linear-gradient(180deg, var(--oxford-blue) 0%, var(--space-cadet) 100%);
@@ -567,8 +567,25 @@ html.locked, html.locked body {
   padding-left: 50px;
   padding-right: 50px;
   overflow: visible;
+} */
+.paragraph-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, var(--oxford-blue) 0%, var(--space-cadet) 100%);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding: 80px 5%;
+  overflow: visible;
 }
 
+.paragraph-box {
+  width: 90%;
+  max-width: 900px;
+}
 /* fixed point at the top the rope hangs from — this never moves */
 .anchor-point {
   position: relative;
